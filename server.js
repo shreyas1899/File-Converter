@@ -5,8 +5,14 @@ const fs = require('fs');
 const sharp = require('sharp');
 const { PDFDocument } = require('pdf-lib');
 
+const http = require('http');
+
 const app = express();
 const PORT = process.env.PORT || 3000;
+const HOST = '0.0.0.0';
+
+// Trust Render reverse proxy (for HTTPS proto and client IP headers)
+app.set('trust proxy', 1);
 
 // Ensure temporary uploads directory exists
 const UPLOAD_DIR = path.join(__dirname, 'uploads');
@@ -56,39 +62,66 @@ const upload = multer({
 });
 
 // -------------------------------------------------------------
-// Middleware
+// Middleware & Resilient Static File Resolution
 // -------------------------------------------------------------
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Serve static assets from the public directory
-app.use(express.static(path.join(__dirname, 'public')));
+// Helper to resolve files whether nested in /public or flat at project root
+const getPagePath = (filename) => {
+  const inPublic = path.join(__dirname, 'public', filename);
+  if (fs.existsSync(inPublic)) return inPublic;
+  return path.join(__dirname, filename);
+};
+
+// Serve static assets from /public if present, else fallback to root
+if (fs.existsSync(path.join(__dirname, 'public'))) {
+  app.use(express.static(path.join(__dirname, 'public')));
+}
+app.use(express.static(__dirname));
+
+// Route handlers for CSS and JS to support both /css/styles.css and /styles.css
+app.get('/css/styles.css', (req, res, next) => {
+  const nested = path.join(__dirname, 'public', 'css', 'styles.css');
+  if (fs.existsSync(nested)) return res.sendFile(nested);
+  const flat = path.join(__dirname, 'styles.css');
+  if (fs.existsSync(flat)) return res.sendFile(flat);
+  next();
+});
+
+app.get('/js/script.js', (req, res, next) => {
+  const nested = path.join(__dirname, 'public', 'js', 'script.js');
+  if (fs.existsSync(nested)) return res.sendFile(nested);
+  const flat = path.join(__dirname, 'script.js');
+  if (fs.existsSync(flat)) return res.sendFile(flat);
+  next();
+});
 
 // -------------------------------------------------------------
 // Page Routing
 // -------------------------------------------------------------
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+  res.sendFile(getPagePath('index.html'));
 });
 
 app.get('/jpg-to-pdf', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'jpg-to-pdf.html'));
+  res.sendFile(getPagePath('jpg-to-pdf.html'));
 });
 
 app.get('/png-to-pdf', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'png-to-pdf.html'));
+  res.sendFile(getPagePath('png-to-pdf.html'));
 });
 
 app.get(['/about', '/about.html'], (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'about.html'));
+  res.sendFile(getPagePath('about.html'));
 });
 
 app.get(['/contact', '/contact.html'], (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'contact.html'));
+  res.sendFile(getPagePath('contact.html'));
 });
 
 app.get(['/privacy', '/privacy.html'], (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'privacy.html'));
+  res.sendFile(getPagePath('privacy.html'));
 });
 
 // -------------------------------------------------------------
@@ -271,13 +304,17 @@ app.use((err, req, res, next) => {
 
 // 404 Fallback
 app.use((req, res) => {
-  res.status(404).sendFile(path.join(__dirname, 'public', 'index.html'));
+  res.status(404).sendFile(getPagePath('index.html'));
 });
 
-// Start Server
-app.listen(PORT, () => {
+// Create HTTP Server (supports HTTP, static frontend serving, and WebSocket upgrades on same port)
+const server = http.createServer(app);
+
+// Start Server - Explicitly bind to HOST (0.0.0.0) and PORT (process.env.PORT)
+server.listen(PORT, HOST, () => {
   console.log(`===================================================`);
-  console.log(`🚀 FastConvert Server running at http://localhost:${PORT}`);
+  console.log(`🚀 FastConvert Server running at http://${HOST}:${PORT}`);
+  console.log(`📁 Environment PORT: ${process.env.PORT || '3000 (default)'}`);
   console.log(`📁 Stateless temporary upload dir: ${UPLOAD_DIR}`);
   console.log(`===================================================`);
 });
