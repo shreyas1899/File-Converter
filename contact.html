@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Contact the FastConvert team for support, feature inquiries, or privacy questions.">
+  <title>Contact Us - FastConvert</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+
+  <!-- Site Navigation -->
+  <header class="site-header">
+    <div class="container nav-wrapper">
+      <a href="/" class="brand">
+        <span class="brand-icon">⚡</span>
+        <span>FastConvert</span>
+        <span class="brand-badge">Stateless</span>
+      </a>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="/" class="nav-link">Home</a></li>
+          <li><a href="/jpg-to-pdf" class="nav-link">JPG to PDF</a></li>
+          <li><a href="/png-to-pdf" class="nav-link">PNG to PDF</a></li>
+          <li><a href="/about.html" class="nav-link">About</a></li>
+          <li><a href="/contact.html" class="nav-link active">Contact</a></li>
+          <li><a href="/privacy.html" class="nav-link">Privacy</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <div class="container">
+      <div class="content-wrapper">
+        <div class="content-header">
+          <h1>Contact & Support</h1>
+          <p>Have questions, feedback, or need assistance? Drop us a message below.</p>
+        </div>
+
+        <div class="content-body">
+          <!-- Form Feedback Message Banner -->
+          <div id="formFeedback" class="hidden" style="margin-bottom: 1.5rem;"></div>
+
+          <form id="contactForm" novalidate>
+            <div class="form-group">
+              <label for="name" class="form-label">Full Name *</label>
+              <input type="text" id="name" name="name" class="form-input" placeholder="e.g. Jane Doe" required>
+            </div>
+
+            <div class="form-group">
+              <label for="email" class="form-label">Email Address *</label>
+              <input type="email" id="email" name="email" class="form-input" placeholder="e.g. jane@example.com" required>
+            </div>
+
+            <div class="form-group">
+              <label for="subject" class="form-label">Subject</label>
+              <input type="text" id="subject" name="subject" class="form-input" placeholder="e.g. Feature Suggestion / Bug Report">
+            </div>
+
+            <div class="form-group">
+              <label for="message" class="form-label">Message *</label>
+              <textarea id="message" name="message" class="form-textarea" placeholder="Write your message here..." required></textarea>
+            </div>
+
+            <button type="submit" class="btn-primary" style="margin-top: 1rem;">
+              <span>Send Message</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="22" y1="2" x2="11" y2="13"></line>
+                <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+              </svg>
+            </button>
+          </form>
+
+          <div class="callout-box" style="margin-top: 2.5rem;">
+            <p><strong>Note on Technical Support:</strong> Because FastConvert does not store user files or retain server logs containing your uploaded content, our support team cannot retrieve previously converted files. Please ensure you download your converted documents immediately after processing.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="container footer-content">
+      <div class="footer-top">
+        <div>
+          <div class="footer-brand">FastConvert</div>
+          <div class="footer-tagline">Fast, private, stateless image and document conversions.</div>
+        </div>
+        <ul class="footer-nav">
+          <li><a href="/" class="footer-link">Home</a></li>
+          <li><a href="/jpg-to-pdf" class="footer-link">JPG to PDF</a></li>
+          <li><a href="/png-to-pdf" class="footer-link">PNG to PDF</a></li>
+          <li><a href="/about.html" class="footer-link">About</a></li>
+          <li><a href="/contact.html" class="footer-link">Contact</a></li>
+          <li><a href="/privacy.html" class="footer-link">Privacy Policy</a></li>
+        </ul>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2026 FastConvert. Built with Vanilla HTML5, CSS3, and Node.js.</span>
+        <div class="stateless-badge">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+          </svg>
+          <span>Zero Server Data Retention</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/js/script.js"></script>
+</body>
+</html>

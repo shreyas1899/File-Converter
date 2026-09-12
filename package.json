@@ -1,0 +1,27 @@
+{
+  "name": "fastconvert-file-converter",
+  "version": "1.0.0",
+  "description": "A clean, stateless image and document file converter built with Node.js, Express, and Vanilla web technologies.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "keywords": [
+    "file-converter",
+    "jpg-to-pdf",
+    "png-to-pdf",
+    "image-converter",
+    "express",
+    "pdf-lib",
+    "sharp"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.21.0",
+    "multer": "^1.4.5-lts.1",
+    "pdf-lib": "^1.17.9",
+    "sharp": "^0.33.5"
+  }
+}

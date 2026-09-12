@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Convert PNG images with transparency and crisp graphics to PDF documents instantly. Fast, free, and stateless with zero file storage.">
+  <title>PNG to PDF Converter - FastConvert</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+
+  <!-- Site Navigation -->
+  <header class="site-header">
+    <div class="container nav-wrapper">
+      <a href="/" class="brand">
+        <span class="brand-icon">⚡</span>
+        <span>FastConvert</span>
+        <span class="brand-badge">Stateless</span>
+      </a>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="/" class="nav-link">Home</a></li>
+          <li><a href="/jpg-to-pdf" class="nav-link">JPG to PDF</a></li>
+          <li><a href="/png-to-pdf" class="nav-link active">PNG to PDF</a></li>
+          <li><a href="/about.html" class="nav-link">About</a></li>
+          <li><a href="/contact.html" class="nav-link">Contact</a></li>
+          <li><a href="/privacy.html" class="nav-link">Privacy</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <div class="container">
+      
+      <!-- Hero Section -->
+      <section class="hero">
+        <div class="hero-pill">
+          <span class="hero-pill-dot"></span>
+          <span>Dedicated Tool • PNG to PDF</span>
+        </div>
+        <h1 class="hero-title">Convert <span class="text-gradient">PNG to PDF</span> Instantly</h1>
+        <p class="hero-subtitle">
+          Transform screenshots, digital signatures, diagrams, and transparent PNG graphics into pristine PDF pages with zero compression loss.
+        </p>
+      </section>
+
+      <!-- Dedicated Converter App Card -->
+      <section class="converter-card" aria-label="PNG to PDF Converter">
+        
+        <!-- Drag & Drop Upload Zone (Configured for PNG) -->
+        <div id="dropzone" class="dropzone" data-required-type="png" tabindex="0" role="button" aria-label="Upload PNG File">
+          <div class="dropzone-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+              <polyline points="14 2 14 8 20 8"></polyline>
+              <line x1="12" y1="18" x2="12" y2="12"></line>
+              <line x1="9" y1="15" x2="15" y2="15"></line>
+            </svg>
+          </div>
+          <h2 class="dropzone-title">Drop your PNG image here</h2>
+          <p class="dropzone-desc">Accepts lossless .png files with or without alpha channel (Up to 25MB)</p>
+          <span class="dropzone-btn">Select PNG File</span>
+          <input type="file" id="fileInput" class="file-input" accept="image/png">
+        </div>
+
+        <!-- Selected File Preview Container -->
+        <div id="filePreview" class="file-preview hidden">
+          <div class="preview-left">
+            <div class="preview-thumbnail-wrapper">
+              <img id="previewThumbnail" class="preview-thumbnail" alt="Selected PNG preview">
+            </div>
+            <div class="preview-details">
+              <span id="previewName" class="preview-name">graphic.png</span>
+              <span id="previewSize" class="preview-meta">1.8 MB</span>
+            </div>
+          </div>
+          <button id="btnRemove" class="btn-remove" title="Remove selected file" aria-label="Remove selected file">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+
+        <!-- Preconfigured Conversion Controls -->
+        <div id="converterControls" class="converter-controls hidden">
+          <!-- Preset format to PDF -->
+          <input type="radio" name="targetFormat" value="pdf" checked class="hidden">
+
+          <div class="callout-box" style="margin-top: 0; margin-bottom: 1.25rem;">
+            <p>Target Output: <strong>Lossless PDF Document</strong> (Direct PNG vector embedding)</p>
+          </div>
+
+          <button id="btnConvert" class="btn-primary">
+            <span>Generate PDF Document</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </button>
+        </div>
+
+        <!-- Dynamic Status & Feedback State Container -->
+        <div id="statusContainer" class="status-container hidden">
+          
+          <!-- Processing Spinner State -->
+          <div id="spinnerWrapper" class="spinner-wrapper hidden">
+            <div class="spinner"></div>
+            <div class="status-text">Embedding PNG into PDF...</div>
+            <p class="status-subtext">Optimizing alpha channels and exact aspect ratio</p>
+          </div>
+
+          <!-- Done / Success Download State -->
+          <div id="resultBox" class="result-box hidden">
+            <div class="result-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+            </div>
+            <h3 class="result-title">Your PDF Is Ready!</h3>
+            <p id="resultName" class="result-desc">graphic.pdf</p>
+            
+            <div class="download-actions">
+              <button id="btnDownload" class="btn-primary btn-download">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                  <polyline points="7 10 12 15 17 10"></polyline>
+                  <line x1="12" y1="15" x2="12" y2="3"></line>
+                </svg>
+                <span>Download PDF File</span>
+              </button>
+              <button id="btnReset" class="btn-secondary">Convert Another PNG</button>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Error Notification Banner -->
+        <div id="errorBox" class="error-box hidden" role="alert">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="12" y1="8" x2="12" y2="12"></line>
+            <line x1="12" y1="16" x2="12.01" y2="16"></line>
+          </svg>
+          <span id="errorMessage">Error message</span>
+        </div>
+
+      </section>
+
+      <!-- Specific Guidance Section -->
+      <section class="section">
+        <h2 class="section-title">Perfect for Diagrams, Badges & Screenshots</h2>
+        <p class="section-subtitle">Retain sharp edges, typography clarity, and full color profiles</p>
+        
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-icon-wrapper">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+              </svg>
+            </div>
+            <h3 class="feature-title">Razor-Sharp Text & Lines</h3>
+            <p class="feature-desc">Unlike lossy converters, our pipeline preserves fine line art, architectural sketches, code snippets, and UI mockups with pristine clarity.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon-wrapper">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <polygon points="12 8 8 12 12 16 16 12 12 8"></polygon>
+              </svg>
+            </div>
+            <h3 class="feature-title">Color Profile Preservation</h3>
+            <p class="feature-desc">SRGB color mappings are mapped accurately to the PDF color space, guaranteeing that brand logos and marketing assets maintain their true hues.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon-wrapper">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                <line x1="3" y1="9" x2="21" y2="9"></line>
+                <line x1="9" y1="21" x2="9" y2="9"></line>
+              </svg>
+            </div>
+            <h3 class="feature-title">Automatic Page Dimensioning</h3>
+            <p class="feature-desc">The PDF document canvas is automatically sized to match the pixel resolution of your PNG, so no awkward white margins or unnatural cropping occurs.</p>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="container footer-content">
+      <div class="footer-top">
+        <div>
+          <div class="footer-brand">FastConvert</div>
+          <div class="footer-tagline">Fast, private, stateless image and document conversions.</div>
+        </div>
+        <ul class="footer-nav">
+          <li><a href="/" class="footer-link">Home</a></li>
+          <li><a href="/jpg-to-pdf" class="footer-link">JPG to PDF</a></li>
+          <li><a href="/png-to-pdf" class="footer-link">PNG to PDF</a></li>
+          <li><a href="/about.html" class="footer-link">About</a></li>
+          <li><a href="/contact.html" class="footer-link">Contact</a></li>
+          <li><a href="/privacy.html" class="footer-link">Privacy Policy</a></li>
+        </ul>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2026 FastConvert. Built with Vanilla HTML5, CSS3, and Node.js.</span>
+        <div class="stateless-badge">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+          </svg>
+          <span>Zero Server Data Retention</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/js/script.js"></script>
+</body>
+</html>

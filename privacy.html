@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="FastConvert Privacy Policy: Strict zero-storage policy, immediate temporary file deletion, and no database tracking.">
+  <title>Privacy Policy - FastConvert</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+
+  <!-- Site Navigation -->
+  <header class="site-header">
+    <div class="container nav-wrapper">
+      <a href="/" class="brand">
+        <span class="brand-icon">⚡</span>
+        <span>FastConvert</span>
+        <span class="brand-badge">Stateless</span>
+      </a>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="/" class="nav-link">Home</a></li>
+          <li><a href="/jpg-to-pdf" class="nav-link">JPG to PDF</a></li>
+          <li><a href="/png-to-pdf" class="nav-link">PNG to PDF</a></li>
+          <li><a href="/about.html" class="nav-link">About</a></li>
+          <li><a href="/contact.html" class="nav-link">Contact</a></li>
+          <li><a href="/privacy.html" class="nav-link active">Privacy</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <div class="container">
+      <div class="content-wrapper">
+        <div class="content-header">
+          <h1>Privacy Policy</h1>
+          <p>Effective Date: September 2026 • Strict Zero-Storage & Stateless Standard</p>
+        </div>
+
+        <div class="content-body">
+          <div class="callout-box">
+            <p><strong>Summary:</strong> FastConvert is engineered specifically so that we do not own, inspect, store, or sell your files. All files uploaded are processed in a temporary holding directory and permanently deleted from our server immediately upon completion of the conversion.</p>
+          </div>
+
+          <h2>1. Strict Zero File Retention Policy</h2>
+          <p>
+            When you upload an image for conversion, the file is temporarily written to an isolated directory solely to allow Node.js to stream the data through the conversion engine (<code>sharp</code> and <code>pdf-lib</code>). 
+          </p>
+          <p>
+            The moment the conversion finishes and the resulting binary stream is delivered to your browser, an automated <code>finally</code> routine executes that permanently unlinks (deletes) the temporary file from disk. In the rare event of a failed conversion, the file is immediately scrubbed from disk as part of the error handler.
+          </p>
+
+          <h2>2. No Databases & No User Accounts</h2>
+          <p>
+            FastConvert operates entirely without a database. We do not support or require:
+          </p>
+          <ul>
+            <li>User account creation, logins, or passwords</li>
+            <li>Storage of personal identifiers or payment details</li>
+            <li>Historic logs associating IP addresses with uploaded file contents</li>
+            <li>Retention of original file names or metadata once processed</li>
+          </ul>
+
+          <h2>3. Cookies and Telemetry</h2>
+          <p>
+            FastConvert does not employ persistent tracking cookies, cross-site advertising pixels, or invasive surveillance scripts. Any local session state exists purely in your browser's temporary memory (via Vanilla JavaScript DOM state) and is cleared whenever you refresh or close the tab.
+          </p>
+
+          <h2>4. Data Transmission and Security</h2>
+          <p>
+            All network communication between your browser and our server is secured using Transport Layer Security (TLS/HTTPS). This ensures that your files cannot be intercepted, monitored, or tampered with in transit across public networks.
+          </p>
+
+          <h2>5. Your Rights and Data Ownership</h2>
+          <p>
+            You retain 100% full intellectual property ownership and copyright of any images or documents you upload. Because we delete files immediately upon transmission, we do not hold any copy of your files that could be subpoenaed, sold, or shared with third parties.
+          </p>
+
+          <h2>6. Updates to This Policy</h2>
+          <p>
+            Any future revisions to this policy will remain faithful to our foundational stateless promise: zero persistence, zero tracking, and immediate deletion of user data.
+          </p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="container footer-content">
+      <div class="footer-top">
+        <div>
+          <div class="footer-brand">FastConvert</div>
+          <div class="footer-tagline">Fast, private, stateless image and document conversions.</div>
+        </div>
+        <ul class="footer-nav">
+          <li><a href="/" class="footer-link">Home</a></li>
+          <li><a href="/jpg-to-pdf" class="footer-link">JPG to PDF</a></li>
+          <li><a href="/png-to-pdf" class="footer-link">PNG to PDF</a></li>
+          <li><a href="/about.html" class="footer-link">About</a></li>
+          <li><a href="/contact.html" class="footer-link">Contact</a></li>
+          <li><a href="/privacy.html" class="footer-link">Privacy Policy</a></li>
+        </ul>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2026 FastConvert. Built with Vanilla HTML5, CSS3, and Node.js.</span>
+        <div class="stateless-badge">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+          </svg>
+          <span>Zero Server Data Retention</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/js/script.js"></script>
+</body>
+</html>
